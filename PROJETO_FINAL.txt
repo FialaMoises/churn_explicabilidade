@@ -1,0 +1,90 @@
+========================================
+  CHURN PREDICTION - PROJETO FINAL
+========================================
+
+ESTRUTURA LIMPA E ESSENCIAL
+----------------------------
+
+TOTAL: 22 ARQUIVOS
+
+1. FRONT-END (1 arquivo)
+   - app.py                    Dashboard Streamlit completo
+
+2. BACK-END (7 arquivos)
+   src/
+   - __init__.py
+   - data/__init__.py
+   - data/data_loader.py       Carregamento de dados
+   - data/preprocessor.py      Preprocessamento
+   - data/feature_engineering.py   40+ features
+   - models/__init__.py
+   - models/churn_model.py     XGBoost/LightGBM/RF
+
+3. DOCKER (5 arquivos)
+   - Dockerfile                Container dashboard
+   - Dockerfile.jupyter        Container Jupyter
+   - docker-compose.yml        Orquestração
+   - .dockerignore
+   - run.sh / run.bat          Scripts de gerenciamento
+
+4. CONFIGURAÇÕES (3 arquivos)
+   config/
+   - model_config.yaml         Configuração de modelos
+   - cost_config.yaml          Matriz de custos
+   - simulation_config.yaml    Parâmetros de simulação
+
+5. DADOS (1 arquivo)
+   dataraw/
+   - Customer-Churn-Records.csv    10.000 clientes
+
+6. OUTROS (5 arquivos)
+   - README.md                 Documentação principal
+   - requirements.txt          Dependências Python
+   - test_pipeline.py          Testes do pipeline
+   - .gitignore               Git ignore rules
+
+========================================
+COMO USAR
+========================================
+
+WINDOWS:
+  run.bat start
+
+LINUX/MAC:
+  ./run.sh start
+
+ACESSAR:
+  Dashboard: http://localhost:8501
+  Jupyter:   http://localhost:8888
+
+========================================
+COMANDOS DISPONÍVEIS
+========================================
+
+run.bat start    - Iniciar containers
+run.bat stop     - Parar containers
+run.bat logs     - Ver logs
+run.bat test     - Executar testes
+run.bat build    - Reconstruir imagens
+run.bat clean    - Limpar tudo
+run.bat shell    - Abrir shell
+
+========================================
+FUNCIONALIDADES
+========================================
+
+DASHBOARD (6 páginas):
+  - Overview (KPIs, estatísticas)
+  - Análise Exploratória (EDA completo)
+  - Modelo & Predições
+  - Explicabilidade (SHAP/LIME)
+  - Análise de Custo (ROI)
+  - Simulação de Retenção (interativo)
+
+BACKEND:
+  - 40+ features criadas
+  - 4 modelos ML
+  - Pipeline completo
+  - Testes automatizados
+
+========================================

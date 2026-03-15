@@ -1,0 +1,113 @@
+# Configuração de Simulação de Retenção
+
+# Simulação Monte Carlo
+monte_carlo:
+  n_simulations: 10000
+  random_seed: 42
+  confidence_level: 0.95
+
+# Estratégias de Retenção
+retention_strategies:
+  top_risk:
+    name: "Top Risk Strategy"
+    description: "Focar nos clientes de maior risco"
+    target_percentile: 0.10    # Top 10%
+    retention_rate: 0.45
+    cost_per_customer: 100
+
+  high_value_risk:
+    name: "High Value at Risk"
+    description: "Focar em clientes de alto valor em risco"
+    min_ltv: 2000
+    min_churn_prob: 0.50
+    retention_rate: 0.60
+    cost_per_customer: 200
+
+  segmented:
+    name: "Segmented Strategy"
+    description: "Estratégia personalizada por segmento"
+    segments:
+      high_value:
+        min_ltv: 3000
+        retention_rate: 0.65
+        cost: 250
+        incentive_type: "premium_offer"
+
+      medium_value:
+        min_ltv: 1000
+        max_ltv: 3000
+        retention_rate: 0.45
+        cost: 120
+        incentive_type: "standard_discount"
+
+      low_value:
+        min_ltv: 0
+        max_ltv: 1000
+        retention_rate: 0.30
+        cost: 50
+        incentive_type: "engagement_campaign"
+
+  preventive:
+    name: "Preventive Strategy"
+    description: "Intervenção preventiva em risco médio"
+    churn_prob_range: [0.30, 0.60]
+    retention_rate: 0.50
+    cost_per_customer: 80
+
+  personalized:
+    name: "Personalized by Churn Reason"
+    description: "Ação personalizada baseada no motivo de churn"
+    reasons:
+      price_sensitive:
+        action: "discount_offer"
+        retention_rate: 0.55
+        cost: 150
+
+      low_engagement:
+        action: "onboarding_training"
+        retention_rate: 0.40
+        cost: 80
+
+      support_issues:
+        action: "premium_support"
+        retention_rate: 0.50
+        cost: 100
+
+      competitor:
+        action: "feature_bundle"
+        retention_rate: 0.35
+        cost: 120
+
+# Budget Scenarios
+budget_scenarios:
+  limited:
+    total_budget: 50000
+    priority: "roi_maximization"
+
+  moderate:
+    total_budget: 150000
+    priority: "balanced"
+
+  aggressive:
+    total_budget: 300000
+    priority: "market_share"
+
+# Scenario Analysis
+scenario_analysis:
+  enabled: true
+  parameters:
+    retention_rate_variance: 0.15    # ±15% variância
+    cost_variance: 0.10               # ±10% variância
+    churn_prob_variance: 0.05        # ±5% variância
+
+# Output metrics
+output_metrics:
+  - total_customers_targeted
+  - total_customers_retained
+  - total_cost
+  - total_value_preserved
+  - net_roi
+  - roi_percentage
+  - confidence_interval_95
+  - probability_of_profit
+  - value_at_risk

@@ -1,0 +1,73 @@
+# Configuração de Análise de Custos
+
+# Matriz de Custos (em unidades monetárias)
+cost_matrix:
+  # Cliente previsto corretamente como não-churn
+  true_negative:
+    cost: 0
+    description: "Cliente previsto corretamente como não-churn"
+
+  # Cliente não iria sair, mas recebeu incentivo (Falso Positivo)
+  false_positive:
+    base_cost: 100
+    description: "Cliente não iria sair, mas recebeu incentivo de retenção"
+    components:
+      incentive_cost: 50        # Custo do desconto/incentivo
+      operational_cost: 30      # Custo operacional da campanha
+      margin_discount: 20       # Desconto na margem
+
+  # Cliente saiu e não foi identificado (Falso Negativo)
+  false_negative:
+    base_cost: 2000
+    description: "Cliente saiu e não foi identificado a tempo"
+    components:
+      lost_ltv: 1500           # Lifetime Value perdido
+      acquisition_cost: 300    # Custo de adquirir novo cliente
+      referral_value: 200      # Valor de referências perdidas
+
+  # Cliente em risco identificado e retido (Verdadeiro Positivo)
+  true_positive:
+    campaign_cost: 100         # Custo da campanha
+    retention_value: 1500      # Valor do LTV preservado
+    retention_rate: 0.40       # Taxa de sucesso de retenção (40%)
+    net_value: 500             # Valor líquido esperado
+
+# Segmentação de custos por valor de cliente
+customer_segments:
+  high_value:
+    ltv: 5000
+    false_negative_cost: 5000
+    false_positive_cost: 150
+    retention_budget: 300
+
+  medium_value:
+    ltv: 2000
+    false_negative_cost: 2000
+    false_positive_cost: 100
+    retention_budget: 150
+
+  low_value:
+    ltv: 500
+    false_negative_cost: 500
+    false_positive_cost: 50
+    retention_budget: 50
+
+# Análise de sensibilidade
+sensitivity_analysis:
+  enabled: true
+  scenarios:
+    optimistic:
+      retention_rate: 0.60
+      cost_multiplier: 0.8
+    realistic:
+      retention_rate: 0.40
+      cost_multiplier: 1.0
+    pessimistic:
+      retention_rate: 0.25
+      cost_multiplier: 1.2
+
+# ROI Calculation
+roi_calculation:
+  discount_rate: 0.10        # Taxa de desconto anual
+  time_horizon_months: 12    # Horizonte de tempo para ROI
+  churn_rate_baseline: 0.20  # Taxa de churn sem intervenção
